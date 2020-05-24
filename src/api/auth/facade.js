@@ -22,7 +22,13 @@ module.exports = {
             throw error
         };
 
-        let token = jwt.sign({ ...user }, TOKEN_SECRET);
+        let token = jwt.sign({
+            _id: user._id,
+            email: user.email,
+            username: user.username,
+            firstName: user.firstName,
+            lastName: user.lastName
+         }, TOKEN_SECRET);
 
         return {
             user,

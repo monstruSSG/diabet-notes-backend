@@ -7,7 +7,7 @@ module.exports = {
         return users;
     },
     count: async options => {
-        let count = await User.count({ ...options });
+        let count = await User.countDocuments({ ...options });
 
         return count;
     },
