@@ -30,5 +30,10 @@ module.exports = {
         let deletedUser = await User.findByIdAndUpdate(id, { isDeleted: true });
 
         return deletedUser;
+    },
+    findOne: async options => {
+        let user = await User.findOne(options);
+
+        return user;
     }
 }

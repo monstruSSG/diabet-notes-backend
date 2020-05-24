@@ -13,5 +13,6 @@ module.exports = {
             ADMIN: 'admin'
         }
     },
-    SALT_GEN_FACTOR: 10
+    SALT_GEN_FACTOR: process.env.SALT_GEN_FACTOR || 10,
+    TOKEN_SECRET: process.env.TOKEN_SECRET || 'ASOMENRANDOMLONGSTRINGWITHNUM123123'
 }

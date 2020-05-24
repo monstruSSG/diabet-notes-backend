@@ -12,5 +12,6 @@ module.exports = {
     create: database.create,
     update: database.update,
     delete: database.delete,
-    getById: database.getById
+    getById: database.getById,
+    getOne: database.findOne
 }

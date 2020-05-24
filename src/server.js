@@ -6,7 +6,7 @@ const morgan = require('morgan');
 const { notFoundHandler, errorHandler } = require('./utils/middlewares')
 const mongoConnect = require('./database/connection').connect
 const pingElastic = require('./elastic/elastic').ping
-const { users } = require('./api');
+const { users, auth } = require('./api');
 
 Promise.all([
     mongoConnect(),
@@ -19,6 +19,7 @@ Promise.all([
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(morgan('dev'));
 
+    app.use('/auth', auth)
     app.use('/users', users)
 
     app.use(notFoundHandler)
