@@ -14,19 +14,16 @@ const PlanSchema = new Schema({
         default: 160
     },
     slowInsulinType: {
-        type: String,
-        default: ''
+        type: String
     },
     fastInsulinType: {
-        type: String,
-        default: ''
+        type: String
     },
     debuteYear: {
         type: String
     },
     knownProblems: {
-        type: String,
-        default: ''
+        type: String
     },
     person: {
         type: mongoose.Schema.Types.ObjectId,

@@ -41,6 +41,27 @@ const UserSchema = new Schema({
         type: String,
         unique: true
     },
+    country: {
+        type: String
+    },
+    city: {
+        type: String
+    },
+    region: {
+        type: String
+    },
+    street: {
+        type: String
+    },
+    streetNumber: {
+        type: String
+    },
+    clinicName: {
+        type: String
+    },
+    clinicImagePath: {
+        type: String
+    },
     password: {
         type: String
     },

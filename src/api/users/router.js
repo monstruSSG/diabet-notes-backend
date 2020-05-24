@@ -4,6 +4,8 @@ const STATUS_CODES = require('http-status-codes');
 
 const facade = require('./facade');
 
+router.use('/nutritionists', require('./nutritionists/router'))
+
 router.route('/')
     .get(wrap(async (req, res) => {
         let result = await facade.get()
