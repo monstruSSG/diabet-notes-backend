@@ -12,5 +12,6 @@ module.exports = {
             DOCTOR: 'doctor',
             ADMIN: 'admin'
         }
-    }
+    },
+    SALT_GEN_FACTOR: 10
 }

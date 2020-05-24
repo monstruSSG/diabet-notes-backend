@@ -1,14 +1,25 @@
 const express = require('express')
+const helmet = require('helmet');
+const bodyParser = require('body-parser');
+const morgan = require('morgan');
 
 const { notFoundHandler, errorHandler } = require('./utils/middlewares')
 const mongoConnect = require('./database/connection').connect
 const pingElastic = require('./elastic/elastic').ping
+const { users } = require('./api');
 
 Promise.all([
     mongoConnect(),
     pingElastic()
 ]).then(() => {
     const app = express()
+
+    app.use(helmet());
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({ extended: true }));
+    app.use(morgan('dev'));
+
+    app.use('/users', users)
 
     app.use(notFoundHandler)
     app.use(errorHandler)

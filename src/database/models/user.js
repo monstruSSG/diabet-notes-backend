@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 const { isEmail, isMobilePhone } = require('validator');
+const bcrypt = require('bcrypt');
 
-const { DATABASE: { COLLECTION_NAMES: { USER }, USER_TYPES } } = require('../../utils/constants');
+const { DATABASE: { COLLECTION_NAMES: { USER }, USER_TYPES }, SALT_GEN_FACTOR } = require('../../utils/constants');
 
 const { Schema } = mongoose;
 
@@ -52,5 +53,21 @@ const UserSchema = new Schema({
         default: true
     }
 });
+
+UserSchema.pre('save', async function save(next) {
+    if (!this.isModified('password')) return next();
+
+    try {
+        const salt = await bcrypt.genSalt(SALT_GEN_FACTOR);
+        this.password = await bcrypt.hash(this.password, salt);
+        return next();
+    } catch (err) {
+        return next(err);
+    }
+});
+
+UserSchema.methods.validatePassword = function validatePassword(data) {
+    return bcrypt.compare(data, this.password);
+};
 
 module.exports = mongoose.model(USER, UserSchema);
