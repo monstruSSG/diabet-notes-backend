@@ -21,6 +21,7 @@ Promise.all([
 
     app.use('/auth', auth)
     app.use(authHandler)
+    app.use('/auth/logged', (req, res) => res.send({}))
     app.use('/users', users)
     app.use('/values', values)
 
