@@ -11,7 +11,7 @@ router.route('/')
         return res.send(result)
     }))
     .post(wrap(async (req, res) => {
-        let result = await facade.create(req.body.value);
+        let result = await facade.create({ ...req.body.value, createdBy: req.auth._id });
 
         return res.status(STATUS_CODES.CREATED).send(result);
     }))
