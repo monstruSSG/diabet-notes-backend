@@ -1,5 +1,6 @@
 module.exports = {
     users: require('./users/router'),
     auth: require('./auth/router'),
-    values: require('./values/router')
+    values: require('./values/router'),
+    plan: require('./plan/router')
 }

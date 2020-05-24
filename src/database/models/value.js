@@ -16,12 +16,12 @@ const ValueSchema = new Schema({
     fastInsulin: {
         type: String,
         validate: [isNumeric, 'Value must be Numeric'],
-        default: '-'
+        default: '0'
     },
     slowInsulin: {
         type: String,
         validate: [isNumeric, 'Value must be Numeric'],
-        default: '-'
+        default: '0'
     },
     createdBy: {
         type: mongoose.Schema.Types.ObjectId,

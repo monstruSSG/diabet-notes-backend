@@ -5,7 +5,8 @@ module.exports = {
         COLLECTION_NAMES: {
             USER: 'user',
             COMMENT: 'comment',
-            VALUE: 'value'
+            VALUE: 'value',
+            PLAN: 'plan'
         },
         USER_TYPES: {
             USER: 'user',
