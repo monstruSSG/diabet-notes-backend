@@ -17,7 +17,9 @@ module.exports = {
         return newUser;
     },
     getById: async id => {
-        let user = await User.findById(id);
+        let user = await User.findById(id)
+            .populate('nutritionist')
+            .populate('managedUsers');
 
         return user;
     },

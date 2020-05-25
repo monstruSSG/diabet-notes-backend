@@ -18,6 +18,13 @@ router.route('/')
         return res.status(STATUS_CODES.CREATED).send(result);
     }))
 
+router.route('/me')
+    .get(wrap(async (req, res) => {
+        let result = await facade.getById(req.auth._id)
+
+        return res.send(result)
+    }))
+
 router.route('/:ID')
     .get(wrap(async (req, res) => {
         let result = await facade.getById(req.params.ID)
