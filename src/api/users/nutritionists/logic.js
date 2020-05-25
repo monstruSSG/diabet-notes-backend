@@ -14,4 +14,5 @@ module.exports = {
             count
         }
     },
+    update: database.update
 }

@@ -37,6 +37,14 @@ const UserSchema = new Schema({
         type: String,
         unique: true
     },
+    managedUsers: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: USER
+    }],
+    nutritionist: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: USER
+    },
     uniqueDeviceId: {
         type: String,
         unique: true

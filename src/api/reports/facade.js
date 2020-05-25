@@ -4,6 +4,7 @@ const valuesLogic = require('../values/logic')
 
 let helpers = {
     perDayCount: async (day, end) => {
+        
         return {
             day,
             good: (await valuesLogic.get({ $or: [{ value: { $gte: 70 } }, { value: { $lte: 180 } }], $and: [{ createdAt: { $gte: day } }, { createdAt: { $lt: end } }] })).count,

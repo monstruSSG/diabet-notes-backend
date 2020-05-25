@@ -11,4 +11,11 @@ router.route('/')
         return res.send(result)
     }))
 
+router.route('/:NUTRITIONIST_ID/addPatient')
+    .patch(wrap(async (req, res) => {
+        await facade.addPatient(req.params.NUTRITIONIST_ID, req.auth._id)
+
+        return res.send({ message: 'Done' })
+    }))
+
 module.exports = router;
