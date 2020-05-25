@@ -5,6 +5,7 @@ const valuesLogic = require('../values/logic')
 let helpers = {
     perDayCount: async (day, end) => {
         return {
+            day,
             good: (await valuesLogic.get({ $or: [{ value: { $gte: 70 } }, { value: { $lte: 180 } }], $and: [{ createdAt: { $gte: day } }, { createdAt: { $lt: end } }] })).count,
             low: (await valuesLogic.get({ value: { $lt: 70 }, createdAt: { $gte: day }, $and: [{ createdAt: { $gte: day } }, { createdAt: { $lt: end } }] })).count,
             high: (await valuesLogic.get({ value: { $gt: 180 }, createdAt: { $gte: day }, $and: [{ createdAt: { $gte: day } }, { createdAt: { $lt: end } }] })).count
@@ -14,7 +15,7 @@ let helpers = {
 
 module.exports = {
     get: async () => {
-        let todayValues = await valuesLogic.get({ createdAt: { $gte: moment().startOf('day').toDate() } })
+        let todayValues = (await valuesLogic.get({ createdAt: { $gte: moment().startOf('day').toDate() } })).values
         let allValues = (await valuesLogic.get({})).values.map(value => value.value)
 
         let promiseArr = []
@@ -25,9 +26,6 @@ module.exports = {
         }
 
         let lastDaysCount = await Promise.all(promiseArr)
-
-
-        let cnt = await helpers.perDayCount(moment().startOf('day').toDate())
 
         return {
             todayValues,
