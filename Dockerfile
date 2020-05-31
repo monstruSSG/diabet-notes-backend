@@ -11,6 +11,7 @@ COPY ./pm2.config.js ./
 RUN yarn --production
 
 COPY src ./src
+COPY files ./files
 
 # RUN yarn build
 

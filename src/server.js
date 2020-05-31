@@ -19,14 +19,18 @@ Promise.all([
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(morgan('dev'));
 
-    
     app.use('/auth', auth)
     app.use(authHandler)
+
+    app.use('/files', express.static('files'))
+
     app.use('/auth/logged', (req, res) => res.send({}))
     app.use('/users', users)
     app.use('/plan', plan)
     app.use('/values', values)
     app.use('/reports', reports)
+
+    
 
     app.use(notFoundHandler)
     app.use(errorHandler)

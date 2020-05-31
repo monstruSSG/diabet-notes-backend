@@ -41,6 +41,8 @@ const UserSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: USER
     }],
+    analysis: [String],
+    nutritionstPhoto: String,
     nutritionist: {
         type: mongoose.Schema.Types.ObjectId,
         ref: USER

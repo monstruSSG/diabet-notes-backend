@@ -3,6 +3,7 @@ const wrap = require('express-async-wrap');
 const STATUS_CODES = require('http-status-codes');
 
 const facade = require('./facade');
+const multer = require('../../../services/multer')
 
 router.route('/')
     .get(wrap(async (req, res) => {
@@ -14,6 +15,13 @@ router.route('/')
 router.route('/:NUTRITIONIST_ID/addPatient')
     .patch(wrap(async (req, res) => {
         await facade.addPatient(req.params.NUTRITIONIST_ID, req.auth._id)
+
+        return res.send({ message: 'Done' })
+    }))
+
+router.route('/:NUTRITIONIST_ID/photo')
+    .patch(multer.any(), wrap(async (req, res) => {
+        await facade.addPhoto(req.params.NUTRITIONIST_ID, req.files)
 
         return res.send({ message: 'Done' })
     }))
