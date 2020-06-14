@@ -41,6 +41,10 @@ services:
     restart: on-failure
     environment: 
       - PORT=9000
+      - NODE_ENV=prod
+      - MAIL_SERVICE=${MAIL_SERVICE}
+      - USER_MAIL=${USER_MAIL}
+      - USER_MAIL_PASSWORD=${USER_MAIL_PASSWORD}
     depends_on: 
       - diabet_mongo
       - diabet_elastic

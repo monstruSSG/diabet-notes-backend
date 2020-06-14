@@ -9,6 +9,8 @@ services:
     volumes: 
       - ./src:/app/src
       - ./files:/app/files
+    environment: 
+      - NODE_ENV=dev
 
   diabet-nginx: 
     volumes:

@@ -6,7 +6,8 @@ module.exports = {
             watch: false,
             env: {
                 PORT: process.env.PORT,
-                NODE_ENV: 'prod'
+                NODE_ENV: 'prod',
+                ...process.env
             }
         }
     ] : [
@@ -26,7 +27,8 @@ module.exports = {
                 ],
                 env: {
                     PORT: process.env.PORT,
-                    NODE_ENV: 'dev'
+                    NODE_ENV: 'dev',
+                    ...process.env
                 }
             }]
 }
