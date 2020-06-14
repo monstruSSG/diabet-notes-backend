@@ -14,7 +14,7 @@ router.route('/login')
 router.route('/user')
     .post(wrap(async (req, res) => {
         let result = await facade.createUser(req.body.user);
-
+        
         return res.status(STATUS_CODES.CREATED).send(result);
     }))
 

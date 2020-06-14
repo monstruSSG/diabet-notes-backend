@@ -15,6 +15,7 @@ Promise.all([
 ]).then(() => {
     const app = express()
 
+
     app.use(helmet());
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
@@ -25,10 +26,11 @@ Promise.all([
 
     app.use('/files', express.static('files'))
     app.use('/auth', auth)
+
     app.use(authHandler)
+    app.use('/auth/logged', (req, res) => res.send({}))
 
     app.use('/users', users)
-    app.use('/auth/logged', (req, res) => res.send({}))
     app.use('/plan', plan)
     app.use('/values', values)
     app.use('/reports', reports)

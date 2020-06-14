@@ -18,18 +18,27 @@ module.exports = {
 
         return nutritionist
     },
-    createAppointment: async (nutritionistId, userId) => {
-        let nutritionist = await usersLogic.getById(nutritionistId)
+    createAppointment: async userId => {
+        let user = await usersLogic.getById(userId)
+
+        if (!user) {
+            let error = new Error('No user found')
+            error.status = STATUS_CODES.NOT_FOUND
+
+            throw error
+        }
+
+        let nutritionist = await usersLogic.getById(user.nutritionist._id)
 
         if (!nutritionist) {
-            let error = new Error('Not found')
+            let error = new Error('No nutritionist found')
             error.status = STATUS_CODES.NOT_FOUND
 
             throw error
         }
 
         let appointments = nutritionist.appointments
-
+        console.log(JSON.stringify(appointments))
         if (appointments) {
             appointments.push({
                 patient: userId,
@@ -37,7 +46,7 @@ module.exports = {
             })
         }
 
-        await usersLogic.update(nutritionistId, { appointments: appointments })
+        await usersLogic.update(nutritionist._id, { appointments: appointments })
 
         return { message: 'Appointment created' }
     },

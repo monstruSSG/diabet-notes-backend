@@ -12,9 +12,9 @@ router.route('/')
         return res.send(result)
     }))
 
-router.route('/:NUTRITIONIST_ID/appointment')
+router.route('/appointment')
     .patch(wrap(async (req, res) => {
-        await facade.createAppointment(req.params.NUTRITIONIST_ID, req.auth._id)
+        await facade.createAppointment(req.auth._id)
 
         return res.send({ message: 'Appointment created' })
     }))
