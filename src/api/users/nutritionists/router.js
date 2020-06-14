@@ -12,6 +12,20 @@ router.route('/')
         return res.send(result)
     }))
 
+router.route('/:NUTRITIONIST_ID/appointment')
+    .patch(wrap(async (req, res) => {
+        await facade.createAppointment(req.params.NUTRITIONIST_ID, req.auth._id)
+
+        return res.send({ message: 'Appointment created' })
+    }))
+
+router.route('/:NUTRITIONIST_ID/appointment/:USER_ID')
+    .patch(wrap(async (req, res) => {
+        await facade.confirmAppointment(req.params.NUTRITIONIST_ID, req.params.USER_ID)
+
+        return res.send({ message: 'Appontment confirmed' })
+    }))
+
 router.route('/:NUTRITIONIST_ID/addPatient')
     .patch(wrap(async (req, res) => {
         await facade.addPatient(req.params.NUTRITIONIST_ID, req.auth._id)

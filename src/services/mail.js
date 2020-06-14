@@ -13,7 +13,7 @@ var mailOptions = {
     from: process.env.USER_MAIL,
     to: process.env.USER_MAIL,
     subject: 'DiabetNotes',
-    text: 'Sendt from DiabetNotes'
+    text: 'Sent from DiabetNotes'
 }
 
 module.exports = {

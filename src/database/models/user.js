@@ -20,7 +20,7 @@ const UserSchema = new Schema({
     },
     email: {
         type: String,
-       // unique: true,
+        // unique: true,
         validate: [isEmail, 'Invalid Email']
     },
     type: {
@@ -35,12 +35,22 @@ const UserSchema = new Schema({
     },
     identityCardNumber: {
         type: String,
-       // unique: true
+        // unique: true
     },
     managedUsers: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: USER
     }],
+    appointments: [new Schema({
+        patient: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: USER
+        },
+        accepted: {
+            type: Boolean,
+            defaultValue: false
+        }
+    })],
     analysis: [String],
     nutritionstPhoto: String,
     nutritionist: {
@@ -49,7 +59,7 @@ const UserSchema = new Schema({
     },
     uniqueDeviceId: {
         type: String,
-       // unique: true
+        // unique: true
     },
     country: {
         type: String
