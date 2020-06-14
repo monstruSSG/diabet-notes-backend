@@ -3,6 +3,7 @@ const wrap = require('express-async-wrap');
 const STATUS_CODES = require('http-status-codes');
 
 const facade = require('./facade');
+const multer = require('../../services/multer')
 
 router.use('/nutritionists', require('./nutritionists/router'))
 
@@ -12,10 +13,12 @@ router.route('/')
 
         return res.send(result)
     }))
-    .post(wrap(async (req, res) => {
-        let result = await facade.create(req.body.user);
+    
+router.route('/addAnalysis')
+    .patch(multer.any(), wrap(async (req, res) => {
+        await facade.addAnalysis(req.auth._id, req.files)
 
-        return res.status(STATUS_CODES.CREATED).send(result);
+        return res.send({ message: 'Done' })
     }))
 
 router.route('/me')

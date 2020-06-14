@@ -5,7 +5,7 @@ const usersLogic = require('../users/logic');
 const { TOKEN_SECRET } = require('../../utils/constants');
 
 module.exports = {
-    login: async (email, password) => {
+    login: async (email, password, deviceId) => {
         let user = await usersLogic.getOne({ email });
 
         if (!user) {
@@ -28,11 +28,21 @@ module.exports = {
             username: user.username,
             firstName: user.firstName,
             lastName: user.lastName
-         }, TOKEN_SECRET);
+        }, TOKEN_SECRET);
+
+        // Update deviceId token
+        if (deviceId) {
+            await usersLogic.update(user._id, { uniqueDeviceId: deviceId })
+        }
 
         return {
             user,
             token
         }
+    },
+    createUser: async user => {
+        let createdUser = await usersLogic.create(user)
+
+        return { user: createdUser }
     }
 }

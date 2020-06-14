@@ -21,7 +21,8 @@ module.exports = {
                     usePolling: true
                 },
                 ignore_watch: [
-                    'node_modules'
+                    'node_modules',
+                    'files'
                 ],
                 env: {
                     PORT: process.env.PORT,

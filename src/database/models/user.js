@@ -20,7 +20,7 @@ const UserSchema = new Schema({
     },
     email: {
         type: String,
-        unique: true,
+       // unique: true,
         validate: [isEmail, 'Invalid Email']
     },
     type: {
@@ -30,12 +30,12 @@ const UserSchema = new Schema({
     },
     phoneNumber: {
         type: String,
-        unique: true,
+        //unique: true,
         validate: [isMobilePhone, 'Invalid Phone Number']
     },
     identityCardNumber: {
         type: String,
-        unique: true
+       // unique: true
     },
     managedUsers: [{
         type: mongoose.Schema.Types.ObjectId,
@@ -49,7 +49,7 @@ const UserSchema = new Schema({
     },
     uniqueDeviceId: {
         type: String,
-        unique: true
+       // unique: true
     },
     country: {
         type: String
