@@ -46,6 +46,9 @@ const UserSchema = new Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: USER
         },
+        date: {
+            type: Date
+        },
         accepted: {
             type: Boolean,
             defaultValue: false

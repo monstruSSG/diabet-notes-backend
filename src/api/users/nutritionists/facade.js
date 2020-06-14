@@ -50,7 +50,7 @@ module.exports = {
 
         return { message: 'Appointment created' }
     },
-    confirmAppointment: async (nutritionistId, userId) => {
+    confirmAppointment: async (nutritionistId, appointmentId, value) => {
         let nutritionist = await usersLogic.getById(nutritionistId)
 
         if (!nutritionist) {
@@ -61,14 +61,17 @@ module.exports = {
         }
 
         let appointments = nutritionist.appointments
-
+        console.log(value)
         if (appointments) {
-            let appointmentIndex = appointments.findIndex(appointment => appointment.patient === userId)
+            let appointmentIndex = appointments.findIndex(appointment => String(appointment._id) === String(appointmentId))
 
             if (appointmentIndex < 0) throw new Error('No appointment found')
 
-            appointments[appointmentIndex].accepted = true
+            if (value.value) appointments[appointmentIndex].accepted = value
+            else appointments[appointmentIndex].date = value.date
         }
+
+        console.log(appointments.map(app => app.accepted))
 
         await usersLogic.update(nutritionistId, { appointments: appointments })
 

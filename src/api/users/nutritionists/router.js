@@ -19,9 +19,9 @@ router.route('/appointment')
         return res.send({ message: 'Appointment created' })
     }))
 
-router.route('/:NUTRITIONIST_ID/appointment/:USER_ID')
+router.route('/appointment/:APPOINTMENT_ID')
     .patch(wrap(async (req, res) => {
-        await facade.confirmAppointment(req.params.NUTRITIONIST_ID, req.params.USER_ID)
+        await facade.confirmAppointment(req.auth._id, req.params.APPOINTMENT_ID, req.body)
 
         return res.send({ message: 'Appontment confirmed' })
     }))
